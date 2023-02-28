@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=hTzJLKNo"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <link rel="stylesheet" href="{%static 'test.css'%}">
+</head>
+
+<body>
+    <button id="stop">Answered</button>
+    <script>
+        let p = "";
+        let your_answers = [];
+        const stop = document.getElementById("stop");
+        const recognition = new webkitSpeechRecognition();
+        recognition.continuous = true;
+        recognition.lang = "en-US";
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+    </script>
+
+
+    {% for question in questions_list %}
+    <script>
+        console.log("Speking!");
+        responsiveVoice.speak('{{ question }}', 'UK English Male', {
+            onend: () => {
+                console.log("spoke");
+                if (!recognition.isRecognitionActive) {
+                    recognition.start();
+                }
+                console.log("listening!");
+                p = "";
+
+                recognition.onresult = (e) => {
+                    console.log(e.results[e.results.length - 1][0].transcript);
+                    p += e.results[e.results.length - 1][0].transcript;
+                    console.log("its p:-  " + p);
+                    localStorage.setItem("ans", p);
+                };
+                recognition.onerror = function (event) {
+                    console.error('Speech recognition error:', event.error);
+                };
+                
+                
+
+            }
+        });
+    </script>
+
+    {% endfor %}
+
+
+</body>
+
+
+
+<script>
+    stop.addEventListener("click", () => {
+        p = localStorage.getItem("ans")
+        console.log(p);
+        your_answers.push(p);
+        recognition.stop();
+    })
+    // fetch('/evaluate',{
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify()
+    //         })
+    //         .then(response => response.json(your_answers))
+    //         .then(your_answers => {
+    //         console.log(your_answers);
+    //         })
+    //         .catch(error => {
+    //         console.error(error);
+    //     });
+
+
+
+</script>
+
+</html>

@@ -1,0 +1,66 @@
+<!-- 
+    <script>
+        setTimeout(() => {
+            responsiveVoice.speak('{{ question }}', 'UK English Male', { onend: () => recognition.start() });
+            p="";
+            recognition.start();
+            recognition.onresult = (e) => {
+                console.log(e.results[e.results.length - 1][0].transcript);
+                p+=e.results[e.results.length - 1][0].transcript;
+            };
+            recognition.onerror = function(event) {
+                console.error('Speech recognition error:', event.error);
+            };
+            setTimeout(() => {
+                recognition.stop();
+            }, 5000);
+        }, {{ forloop.counter0 }} * 6000); // Wait for 6 seconds for each question
+    </script> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--     
+// const text = "Hello, how are you?";
+// const audioConfig = {
+//   audioEncoding: 'MP3',
+//   speakingRate: 0.9,
+//   pitch: -4.0
+// };
+
+// const request = {
+//   input: {text: text},
+//   voice: {languageCode: 'en-US', ssmlGender: 'FEMALE'},
+//   audioConfig: audioConfig,
+// };
+
+// const synthesisEndpoint = 'https://texttospeech.googleapis.com/v1/text:synthesize?key=<YOUR_API_KEY>';
+
+// fetch(synthesisEndpoint, {
+//   method: 'POST',
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+//   body: JSON.stringify(request),
+// })
+//   .then((response) => response.arrayBuffer())
+//   .then((arrayBuffer) => {
+//     const audioContext = new AudioContext();
+//     audioContext.decodeAudioData(arrayBuffer, (buffer) => {
+//       const audioSource = audioContext.createBufferSource();
+//       audioSource.buffer = buffer;
+//       audioSource.connect(audioContext.destination);
+//       audioSource.start();
+//     });
+//   }); -->

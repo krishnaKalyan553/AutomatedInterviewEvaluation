@@ -1,0 +1,8 @@
+body{
+    background-image: url("images/face.png");
+    background-repeat: no-repeat;
+    height: 100vh;
+    background-size: contain;
+    background-position: center;
+    background-color: rgba(56,60,63,255);
+}
