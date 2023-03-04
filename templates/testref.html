@@ -64,3 +64,60 @@
 //       audioSource.start();
 //     });
 //   }); -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{/* let qno=0;
+    let current_ans="";
+    let your_answers = [];
+    const stop = document.getElementById("stop");
+    const recognition = new webkitSpeechRecognition();
+    recognition.continuous = true;
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+    
+    stop.addEventListener("click", () =>{
+        qno = qno+1;
+        recognition.stop();
+        console.log(current_ans);
+        current_ans = "";
+        speak_and_listen(qno);
+    });
+    
+    
+    function speak_and_listen(qno){
+        console.log("Speking!");
+        responsiveVoice.speak(questionsList[qno], 'UK English Male', {
+            onend: () => {
+                console.log("spoke");
+                if (!recognition.isRecognitionActive) {
+                    recognition.start();
+                }
+                console.log("listening!");
+                recognition.onresult = (e) => {
+                    console.log(e.results[e.results.length - 1][0].transcript);
+                    current_ans += e.results[e.results.length - 1][0].transcript;
+                    console.log("its current answer:-  " + current_ans);
+                };
+                recognition.onerror = function (e) {
+                    console.error('Speech recognition error:', e.error);
+                };
+            }
+        });
+    }
+    speak_and_listen(qno) */}

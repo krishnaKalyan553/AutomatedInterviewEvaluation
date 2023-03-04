@@ -2,13 +2,15 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from sentence_transformers import SentenceTransformer
 import numpy as np
+import json 
+
 def home(request):
     return render(request,'home.html')
 
 def test(request):
-
+    questions_list = ["what is your name","how is your day","what are your future plans"]
     rand_questions = {
-        "questions_list":["what is your name","how is your day","what are your future plans"],
+        "questions_list" : json.dumps(questions_list)  
     }
     return render(request,'test.html',rand_questions)
     
