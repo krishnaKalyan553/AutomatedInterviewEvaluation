@@ -3,14 +3,31 @@ from django.http import HttpResponse
 from sentence_transformers import SentenceTransformer
 import numpy as np
 import json 
+import pymongo 
+
+
+
 
 def home(request):
     return render(request,'home.html')
 
 def test(request):
-    questions_list = ["what is your name","how is your day","what are your future plans"]
+    client = pymongo.MongoClient("mongodb+srv://krishnakalyan:ReryxIGi8VCAtTpB@cluster0.fscwz.mongodb.net/test")
+    db = client['Interview_Questions']
+    col = db['dbms']
+    d = list(col.aggregate([ { "$sample": { "size": 5 } } ]))
+    questions_list = []
+    answers_list =  []
+    for q_a in d:
+        q_a.pop('_id',None)
+        questions_list+=(q_a.keys())
+        answers_list+=(q_a.values())
+
     rand_questions = {
-        "questions_list" : json.dumps(questions_list)  
+        "questions_list" : json.dumps(questions_list),
+
+        "answers_list" : json.dumps(answers_list)
+        
     }
     return render(request,'test.html',rand_questions)
     

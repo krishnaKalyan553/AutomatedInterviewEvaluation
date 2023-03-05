@@ -13,7 +13,8 @@
 </head>
 
 <body>
-<button id="stop">Answered</button>
+    <div><center><p id="question"></p></center></div>
+    <button id="stop">Answered</button>
 
 </body>
 
@@ -24,8 +25,11 @@ const last_q = questionsList.length;
 let qno=0;
 let current_ans="";
 let your_answers = [];
+
+const ques =  document.getElementById("question");
 const stop = document.getElementById("stop");
 const recognition = new webkitSpeechRecognition();
+
 recognition.continuous = true;
 recognition.lang = "en-US";
 recognition.interimResults = false;
@@ -46,7 +50,8 @@ stop.addEventListener("click", () =>{
 
 
 function speak_and_listen(qno){
-    console.log("Speking!");
+    // console.log("Speking!");
+    ques.innerHTML = questionsList[qno];
     responsiveVoice.speak(questionsList[qno], 'UK English Male', {
         onend: () => {
             console.log("spoke");

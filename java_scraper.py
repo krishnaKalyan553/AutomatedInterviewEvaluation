@@ -1,6 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
+from pymongo import MongoClient
 url="https://www.tutorialspoint.com/java/java_interview_questions.htm#"
+
+client = MongoClient("mongodb+srv://krishnakalyan:ReryxIGi8VCAtTpB@cluster0.fscwz.mongodb.net/test")
+db = client.get_database('Interview_Questions')
+
+java = db.java
+
 r=requests.get(url)
 soup=BeautifulSoup(r.text,"html.parser")
 #h3,class=h3--> onlt qsns
@@ -22,13 +29,13 @@ for i in d:
     print()'''
 qalist=[]
 for i in range(50):
-    l=[]
-    l.append(lq[i].text)
-    l.append(la[i].text)
-    qalist.append(l)
-for i in qalist:
-    print(i)
-    print()
+    # l=[]
+
+        d = {lq[i].text,la[i].text}
+
+# for i in qalist:
+#     print(i)
+#     print()
 
 
 

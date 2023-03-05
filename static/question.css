@@ -6,5 +6,16 @@ body{
     background-size:cover;
 }
 
+.question{
+    font-size: large;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.stop{
+    position: absolute;
+    bottom: 5px;
+    right: 0px;
+}
+
 
 
