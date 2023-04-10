@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-
 {% load static %}
 <html lang="en">
-
 <head>
 <script src="https://code.responsivevoice.org/responsivevoice.js?key=hTzJLKNo"></script>
 <meta charset="UTF-8">
@@ -13,18 +11,27 @@
 </head>
 
 <body>
-    <div><center><p id="question"></p></center></div>
+    <div class="homepage-component">
+    <img src="{%static './images/face.png' %}" alt="Image">
+    <div id="insdidehome"><p id="question"></p>
     <button id="stop">Answered</button>
-
+    <form id="myform" action="/evaluate/" method="post">
+        {% csrf_token %}
+        <input id="client_ans" type="hidden" name="client_ans">
+        <input id="our_ans" type="hidden" name="our_ans">
+    </form>
+    </div>
+    </div>
 </body>
 
 
 <script>
 const questionsList = JSON.parse('{{questions_list |safe}}');
+// const answersList = JSON.parse('{{answers_list |safe}}');
 const last_q = questionsList.length;
 let qno=0;
 let current_ans="";
-let your_answers = [];
+let eval_arr = [];
 
 const ques =  document.getElementById("question");
 const stop = document.getElementById("stop");
@@ -39,18 +46,31 @@ stop.addEventListener("click", () =>{
     qno = qno+1;
     recognition.stop();
     console.log(current_ans);
+    eval_arr.push(current_ans);
     current_ans = "";
     if(qno<last_q){
         speak_and_listen(qno);
     }
     else{
-        
+    //     const url = "{% url 'evaluate' %}"; // URL of the Django view
+    //     const data = JSON.stringify(questionsList); // Data to send in the request
+    //     axios.post(url,data,{headers:{"Content-Type" : "application/json"}}).then(function(response) {
+    //         window.location.href = '/result/';
+    //   }).catch(function(error) {
+    //     console.log(error);
+    //   });
+        const data = JSON.stringify(eval_arr);
+        const d =  document.getElementById("client_ans");
+        d.value = data;
+        document.getElementById("our_ans").value = '{{answers_list | safe}}';
+        const form = document.getElementById("myform");
+        form.submit();
     }
 });
 
 
+
 function speak_and_listen(qno){
-    // console.log("Speking!");
     ques.innerHTML = questionsList[qno];
     responsiveVoice.speak(questionsList[qno], 'UK English Male', {
         onend: () => {
@@ -72,6 +92,4 @@ function speak_and_listen(qno){
 }
 speak_and_listen(qno) 
 </script>
-
-
 </html>

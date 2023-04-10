@@ -1,22 +1,36 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOME</title>
-    <link rel="stylesheet" href="{%static 'question.css'%}">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HOME</title>
+  <link rel="stylesheet" href="{%static 'question.css'%}">
 </head>
 
 <body>
-    
-    <h2>Welcome to our interview platform!</h2>
-    <p>Our platform provides job seekers with the opportunity to practice their interview skills and get feedback from our AI. We also offer resources to help job seekers prepare for interviews and increase their chances of landing their dream job.</p>
-    <p>If you're an employer, our platform can help you find top talent by providing you with access to a pool of candidates who are actively working on improving their interview skills.</p>
-    
-    <button ><a href="/test">Take Test</a></button>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/test">Take Test</a>
+    <a href="/about">About Us</a>
+    <!-- <a href="#contact">Contact</a>   -->
+  </nav>
+
+  <div class="homepage-component">
+    <img src="{%static './images/homeimg.png' %}" alt="Image">
+    <div class="text-container">
+      <h2>INTERVIEW 😮😨</h2>
+      <p>Our platform provides job seekers with the opportunity to practice their interview skills and get feedback from
+        our AI. We also offer resources to help job seekers prepare for interviews and increase their chances of landing
+        their <b>dream job😎😎</b>.</p>
+      <p>Sounds cool rigth just give a try 😁😁</p>
+      <center><button><a href="/test">Take Test</a></button></center>
+    </div>
+  </div>
 
 
 </body>
+
 </html>

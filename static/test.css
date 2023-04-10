@@ -1,8 +1,39 @@
 body{
-    background-image: url("images/face.png");
-    background-repeat: no-repeat;
-    height: 100vh;
-    background-size: contain;
-    background-position: center;
-    background-color: rgba(56,60,63,255);
+    margin: 0;
+}
+.homepage-component {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	/* justify-content: space-between; */
+	background-color: rgba(56,60,63,255);
+  }
+  
+  #insdidehome{
+    display: flex;
+    margin-left: 0;
+	flex-direction: column;
+    align-items: left;
+  }
+
+  img {
+    width: 50%;
+    margin-left: 0;
+      /* display: block; */
+    margin-right: 5px;
+  }
+
+.question{
+    font-size: large;
+    font-family: 'Times New Roman', Times, serif;
+    color: azure;
+    
+}
+
+.stop{
+    /* width: min-content; */
+    border-radius: 2rem;
+    /* position: absolute; */
+    /* bottom: 5px; */
+    /* right: 0px; */
 }

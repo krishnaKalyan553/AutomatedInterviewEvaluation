@@ -29,13 +29,13 @@ for i in d:
     print()'''
 qalist=[]
 for i in range(50):
-    # l=[]
+    d = {lq[i].text,la[i].text}
+    qalist.append(d)
+    # java.insert_one(d)
 
-        d = {lq[i].text,la[i].text}
-
-# for i in qalist:
-#     print(i)
-#     print()
+for i in qalist:
+    print(i)
+    print()
 
 
 

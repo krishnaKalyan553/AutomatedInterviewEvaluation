@@ -2,7 +2,7 @@ import speech_recognition as sr
 import pyttsx3
 import tensorflow as tf
 # import keras
-import tensorflow_hub as hub
+# import tensorflow_hub as hub
 import numpy as np
 from sentence_transformers import SentenceTransformer
 
@@ -48,7 +48,7 @@ def answer():
 
 
 def eval():
-    model = SentenceTransformer('bert-base-nli-mean-tokens')
+    model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
     original_answer = "Generative Adversarial Networks (GANs) can be described as extremely powerful kinds of neural networks that are employed to aid in Unsupervised Learning. They were created and first introduced in 2014 by Ian J. Goodfellow 2014. GANs are comprised of two neural networks that are in competition with one another and can analyse the changes within a set of data.GANs are a method for generative modelling that uses deep learning methods like CNN (Convolutional Neural Network). Generative modelling is an unsupervised learning method that automatically discovers and learns patterns in input data so that the model can be used for new examples from the original dataset"
     your_answer = question("what is a Generative Adversarial Networks")
