@@ -1,16 +1,41 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Result</title>
+    <link rel="stylesheet" href="{%static 'res.css'%}">
 </head>
 <body>
-    <h1>YOUR RESULTS</h1>
+    <!-- <div > -->
+    <center><h1>YOUR TEST RESULTS</h1></center>
+    <div id ="cc">
+        work_hard <div style="background-color:red;" class="c_code"></div>
+        improve <div style="background-color:rgb(235, 90, 90);" class="c_code"></div>
+        good <div style="background-color:greenyellow;" class="c_code"></div>
+        vgood <div style="background-color:chartreuse;" class="c_code"></div>
+        we hope you have not copied from google<div style="background-color:aquamarine;" class="c_code"></div>
+    </div>    
+    <table id="tab_res">
+    <thead>
+        <tr>
+        <th>question</th>
+        <th>Your Answer</th>
+        <th>Expected Answer</th>
+        <th>Your Accuracy</th>
+    </tr>
+    </thead>
     {% for r in ress %}
-        <p>{{ r }}</p>
+        <tr class = "{% if r.3 < 30 %}work_hard {% elif r.3 < 50 %}improve {% elif r.3 < 75 %}good{% elif r.3 < 96 %}vgood {% else %}plagarism {% endif %}" >
+        {%for q in r%}
+            <td>{{q}}</td>
+        {%endfor%}
+        </tr>
     {% endfor %}
-    
+    </table>
+<!-- </div> -->
 </body>
+
 </html>

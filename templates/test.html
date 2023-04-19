@@ -11,85 +11,129 @@
 </head>
 
 <body>
+    <div id="countdown">
+        <span id="minutes">02</span>:<span id="seconds">00</span>
+    </div> 
+    
     <div class="homepage-component">
     <img src="{%static './images/face.png' %}" alt="Image">
     <div id="insdidehome"><p id="question"></p>
-    <button id="stop">Answered</button>
+   <br>
     <form id="myform" action="/evaluate/" method="post">
         {% csrf_token %}
         <input id="client_ans" type="hidden" name="client_ans">
         <input id="our_ans" type="hidden" name="our_ans">
+        <input id="ques" type="hidden" name="ques">
     </form>
+    <button id="stop">Answered</button>
+    <!-- <br>     -->
+    <!-- <button id="skip">Dont Konw</button> -->
     </div>
     </div>
-</body>
 
-
-<script>
-const questionsList = JSON.parse('{{questions_list |safe}}');
-// const answersList = JSON.parse('{{answers_list |safe}}');
-const last_q = questionsList.length;
-let qno=0;
-let current_ans="";
-let eval_arr = [];
-
-const ques =  document.getElementById("question");
-const stop = document.getElementById("stop");
-const recognition = new webkitSpeechRecognition();
-
-recognition.continuous = true;
-recognition.lang = "en-US";
-recognition.interimResults = false;
-recognition.maxAlternatives = 1;
-
-stop.addEventListener("click", () =>{
-    qno = qno+1;
-    recognition.stop();
-    console.log(current_ans);
-    eval_arr.push(current_ans);
-    current_ans = "";
-    if(qno<last_q){
-        speak_and_listen(qno);
+    
+<script defer>
+    const questionsList = JSON.parse('{{questions_list |safe}}');
+    // const answersList = JSON.parse('{{answers_list |safe}}');
+    const last_q = questionsList.length;
+    let qno=0;
+    let current_ans="";
+    let eval_arr = [];
+    function fill(){
+        for(let i=0 ;i<last_q;i++){
+            eval_arr.push("");
+        }
     }
-    else{
-    //     const url = "{% url 'evaluate' %}"; // URL of the Django view
-    //     const data = JSON.stringify(questionsList); // Data to send in the request
-    //     axios.post(url,data,{headers:{"Content-Type" : "application/json"}}).then(function(response) {
-    //         window.location.href = '/result/';
-    //   }).catch(function(error) {
-    //     console.log(error);
-    //   });
-        const data = JSON.stringify(eval_arr);
-        const d =  document.getElementById("client_ans");
+    fill()
+    let t = document.getElementById("time")
+    const ques =  document.getElementById("question");
+    const stop = document.getElementById("stop");
+    const skip = document.getElementById("skip");
+    const recognition = new webkitSpeechRecognition();
+    const form = document.getElementById("myform");
+    let first = true;
+    recognition.continuous = true;
+    recognition.lang = "en-IN";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+    
+
+    function sub(){
+        let data = JSON.stringify(eval_arr);
+        let d =  document.getElementById("client_ans");
         d.value = data;
-        document.getElementById("our_ans").value = '{{answers_list | safe}}';
-        const form = document.getElementById("myform");
+        document.getElementById("our_ans").value = '{{answers_list |safe}}';
+        document.getElementById("ques").value  = '{{questions_list |safe}}';
         form.submit();
     }
-});
+    function startCountdown() {
+        var timer = 120;
+        setInterval(function () {
+            var minutes = Math.floor(timer / 60);
+            var seconds = timer % 60;
+            document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
 
-
-
-function speak_and_listen(qno){
-    ques.innerHTML = questionsList[qno];
-    responsiveVoice.speak(questionsList[qno], 'UK English Male', {
-        onend: () => {
-            console.log("spoke");
-            if (!recognition.isRecognitionActive) {
-                recognition.start();
+            if (--timer <= 0) {
+                sub();
+                timer=0;
             }
-            console.log("listening!");
-            recognition.onresult = (e) => {
-                console.log(e.results[e.results.length - 1][0].transcript);
-                current_ans += e.results[e.results.length - 1][0].transcript;
-                console.log("its current answer:-  " + current_ans);
-            };
-            recognition.onerror = function (e) {
-                console.error('Speech recognition error:', e.error);
-            };
+        }, 1000);
+    }
+
+
+
+    function answered(){
+        qno = qno+1;
+        recognition.stop();
+        // console.log(current_ans);
+        if(first){startCountdown();first=false;}
+        if(qno!=1){
+            eval_arr[qno-2] = current_ans;   
         }
-    });
-}
-speak_and_listen(qno) 
-</script>
+        current_ans = "";
+        if(qno<last_q){
+            speak_and_listen(qno);
+        }
+        else{
+            let data = JSON.stringify(eval_arr);
+            let d =  document.getElementById("client_ans");
+            d.value = data;
+            document.getElementById("our_ans").value = '{{answers_list |safe}}';
+            document.getElementById("ques").value  = '{{questions_list |safe}}';
+            sub();
+        }
+    }
+    
+    stop.addEventListener("click",answered);
+    // skip.addEventListener("click",answered);
+    
+    
+    
+    function speak_and_listen(qno){
+        ques.innerHTML = questionsList[qno];
+        responsiveVoice.speak(questionsList[qno], 'UK English Male',{
+            onend: () => {
+                console.log("spoke");
+                if (!recognition.isRecognitionActive){
+                    recognition.start();
+                    // const tt = 120
+                    // setInterval
+                }
+                console.log("listening!");
+                recognition.onresult = (e) => {
+                    console.log(e.results[e.results.length - 1][0].transcript);
+                    current_ans += e.results[e.results.length - 1][0].transcript;
+                    console.log("its current answer:-  " + current_ans);
+                };
+                recognition.onerror = function (e) {
+                    console.error('Speech recognition error:', e.error);
+                };
+    
+            }
+        });
+    }
+    speak_and_listen(qno) 
+    </script>
+</body>
 </html>

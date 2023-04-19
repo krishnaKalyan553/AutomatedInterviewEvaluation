@@ -1,0 +1,48 @@
+
+body{
+    margin-left: 3vh;
+    margin-right: 3vh;
+}
+
+#tab_res , th ,td{
+    border : 0.1rem solid black;
+    padding: 1px;
+}
+
+td{
+    padding: 0.5rem;
+    margin : 0.5rem;
+}
+
+#cc{
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    margin: 5vh;
+}
+
+.c_code{
+    width: 3%;
+}
+
+
+
+.work_hard{
+    background-color: red;
+}
+
+.improve{
+    background-color: rgb(235, 90, 90);
+}
+
+.good{
+    background-color: greenyellow;
+}
+
+.vgood{
+    background-color: chartreuse;
+}
+
+.plagarism{
+    background-color: aquamarine;
+}
