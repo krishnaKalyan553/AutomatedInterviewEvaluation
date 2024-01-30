@@ -8,4 +8,4 @@ torch
 urllib3
 waitress
 whitenoise
-
+pytz
