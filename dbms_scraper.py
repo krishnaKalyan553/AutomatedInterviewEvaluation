@@ -1,22 +1,26 @@
 import requests
 from bs4 import BeautifulSoup
-from pymongo import MongoClient
-import re
-from dotenv import load_dotenv
-import os
-load_dotenv()
+# from pymongo import MongoClient
+# import re
+# from dotenv import load_dotenv
+# import os
+# load_dotenv()
 
-security_code = os.getenv('SECURITY_CODE')
-client = MongoClient("mongodb+srv://krishnakalyan:"+security_code)
-db = client.get_database('Interview_Questions')
+# security_code = os.getenv('SECURITY_CODE')
+# client = MongoClient("mongodb+srv://krishnakalyan:"+security_code)
+# db = client.get_database('Interview_Questions')
 
-dbms = db.trash
+# dbms = db.trash
 
-# url="https://www.tutorialspoint.com/sql/sql_interview_questions.htm"
-# r=requests.get(url)
-# soup=BeautifulSoup(r.text,"html.parser")
-# qsn=soup.find("div",id="mainContent")
-# lq = qsn.find_all("label")
+url="https://www.tutorialspoint.com/sql/sql_interview_questions.htm"
+r=requests.get(url)
+# print(r.text)
+soup=BeautifulSoup(r.text,"html.parser")
+# print(soup)
+qsn=soup.find("div",id="mainContent")
+lq = qsn.find_all("label")
+print(lq)
+
 # la=qsn.find_all("div",class_="toggle-content")
 # # print(len(lq))
 # # qalist=[]

@@ -7,7 +7,24 @@ import pymongo
 import random
 from dotenv import load_dotenv
 import os
+# import pyrebase
 
+# config = {
+#     "apiKey": "AIzaSyCNTJ3TKvM35NvwsrHaIgTeZjtZK9RZKBk", 
+#     "authDomain": "automatedinterviewevaluation.firebaseapp.com",
+#     "projectId": "automatedinterviewevaluation", 
+#     "storageBucket": "automatedinterviewevaluation.appspot.com", 
+#     "messagingSenderId": "721658709739", 
+#     "appId": "1:721658709739:web:88b0cddb930d4bc54d60ae",
+#     "measurementId": "G-K0QT9G77XY",
+# }
+
+# firebase  = pyrebase.initialize_app(config)
+# storage = firebase.storage()
+# storage.child("static/style.css").put("path/to/static/style.css")
+# storage.child("static/script.js").put("path/to/static/script.js")
+# storage.child("static/images/logo.png").put("path/to/static/images/logo.png")
+# functions = firebase.functions()
 
 personality = ["If you could change one thing about your personality, what would it be?",
 "Tell me about a stressful scenario in the past and how you handled it.",
@@ -33,13 +50,18 @@ def test(request):
     col = db['dbms']
     d = list(col.aggregate([ { "$sample": { "size": 2 } } ]))
     questions_list = [random.choice(personality)]
+    # questions_list = [personality[5]]
     # global answers_list
     answers_list =  []
     for q_a in d:
-        # print(q_a)
+        print(q_a)
         q_a.pop('_id',None)
         questions_list+=(q_a.keys())
         answers_list+=(q_a.values())
+
+    # questions_list+=["What is an Entity set?","What is Weak Entity set?","What is kernel?","What is monolithic kernel?"]
+    # answers_list+=["The entity set specifies the collection of all entities of a particular entity type in the database. An entity set is known as the set of all the entities which share the same properties.","An entity set that doesnt have sufficient attributes to form a primary key is referred to as a weak entity set. The member of a weak entity set is known as a subordinate entity. Weak entity set does not have a primary key, but we need a mean to differentiate among all those entries in the entity set that depend on one particular strong entity set.","Kernel is the core and most important part of a computer operating system which provides basic services for all parts of the OS.","A monolithic kernel is a kernel which includes all operating system code is in single executable image."]
+
 
     rand_questions = {
         "questions_list" : json.dumps(questions_list),
@@ -92,3 +114,5 @@ def contact(request):
 def about(request):
     return render(request,"about.html")
 
+
+# functions.deploy()

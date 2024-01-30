@@ -7,13 +7,11 @@
     <title>INSTRUCTIONS</title>
     <style>
         body{
-            margin: 3rem;
+            margin-left: 2rem;
         }
     </style>
 </head>
 <body>
-
-
     <center><h1>INSTRUCTIONS</h1></center>
     <br>
     <p>The Test contains <b> 10 questions </b> we provide the results based on similarity between your answer and expected answer</p> 
@@ -26,29 +24,20 @@
     <br>
     <p><b>A Timer of 15 minutes starts after the completion of the 1st (personality based) question</b></p>
     <br>
-
+    <!-- <p>Use Effective Time Managent Skills to Answer All the questions </p> -->
     <p>Use Effective Time Managent Skills to Answer All the questions </p>
 
     <br>
+    <p>Use high speed Internet connection and chrome for better performance </p>
+
     <br>
-
-    <p></p>
-
-
     <p>Click start test when you are ready to take the test</p>
 
-    
     <br>
-    <br>
-    <p><b></b></p>
 
-    <br>
-    <br>
-    <br>
-    <br>
     <form>
-        I declare that i read all the above Instructions
-        <input type="checkbox" id="check" >
+        <b>I declare that I read all the above Instructions</b>
+        <input type="checkbox" id="check"  >
     </form>
     <p id = "text"></p>
     <button onclick="p()" id="sub">Start Test</button>
@@ -59,6 +48,7 @@
         function p(){
             let c = document.getElementById("check")
             if(c.checked !=true){
+                text.style.color="red";
                 text.innerHTML = "check the declaration";
             }
             else{
