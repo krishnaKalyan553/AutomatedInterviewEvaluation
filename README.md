@@ -3,12 +3,17 @@
 
 Welcome to the interview platform are you feeling bored just give this a try.  
 
+To get started first clone the project using the command
+git clone https://github.com/krishnaKalyan553/AutomatedInterviewEvaluation.git
 
-## Demo 🚀
+Then follow up with the command
+```bash
+pip install -r requirements.txt
+```
+<button onclick="navigator.clipboard.writeText('pip install -r requirements.txt')">Copy</button>
 
-
-
-Try out the application here 😎
+Now run the server using the command
+python manange.py runserver
 
 
 ## Key Features 🌟
