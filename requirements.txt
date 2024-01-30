@@ -9,4 +9,3 @@ urllib3
 waitress
 whitenoise
 pytz
-dotenv
