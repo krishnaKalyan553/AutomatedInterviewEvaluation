@@ -5,7 +5,6 @@ import numpy as np
 import json
 import pymongo 
 import random
-from dotenv import load_dotenv
 import os
 # import pyrebase
 
@@ -45,7 +44,7 @@ def home(request):
 def test(request):
     load_dotenv()
     security_code = os.getenv('SECURITY_CODE')
-    client = pymongo.MongoClient("mongodb+srv://krishnakalyan:"+security_code)
+    client = pymongo.MongoClient("mongodb+srv://krishnakalyan:"+"1yCYugasJ3sAEjcv@cluster0.fscwz.mongodb.net/test")
     db = client['Interview_Questions']
     col = db['dbms']
     d = list(col.aggregate([ { "$sample": { "size": 2 } } ]))
